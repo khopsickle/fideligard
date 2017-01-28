@@ -29,8 +29,13 @@ services -> watch out for circular dependencies
     - interacts with portfolio and stocks
       - pushes a trade into transactions
       - update portfolio
-  - date
+  - date (slider)
+    - first date
+    - end date
+    - current date
+    - convert date strings to date objs
     - stores date
+    - $broadcast, $emit - sends a var up/down nested scopes
   - transaction
     - trade history storage
 
