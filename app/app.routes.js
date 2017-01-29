@@ -6,8 +6,12 @@ FG.config(function($stateProvider, $urlRouterProvider) {
     .state('main', {
       url: '',
       views: {
-        '@': {
-          templateUrl: 'app/components/main/main.html',
+        'stocks': {
+          templateUrl: 'app/components/stocks/stocks.html',
+          controller: 'MainCtrl'
+        },
+        'date': {
+          templateUrl: 'app/components/date/date.html',
           controller: 'MainCtrl'
         }
       },
@@ -20,16 +24,15 @@ FG.config(function($stateProvider, $urlRouterProvider) {
     .state('main.portfolio', {
       url: '/portfolio',
       views: {
-        'content@main': {
+        'content@': {
           templateUrl: 'app/components/portfolio/portfolio.html'
         }
-      },
-      controller: 'MainCtrl'
+      }
     })
     .state('main.trade', {
       url: '/trade',
       views: {
-        'content@main': {
+        'content@': {
           templateUrl: 'app/components/trade/trade.html'
         }
       }
@@ -37,7 +40,7 @@ FG.config(function($stateProvider, $urlRouterProvider) {
     .state('main.transactions', {
       url: '/transactions',
       views: {
-        'content@main': {
+        'content@': {
           templateUrl: 'app/components/transactions/transactions.html'
         }
       }

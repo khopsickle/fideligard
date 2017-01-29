@@ -4,17 +4,18 @@ FG.factory('stockService',
     function($http) {
 
       var stocks = {};
+      var stocksArray = [];
 
       var all = function all() {
         return $http({
           method: 'GET',
-          url: '/assets/data/stocks.json'
+          url: '/assets/data/AAPL.json'
         })
         .then(function(response){
           var data = response.data.query.results.quote;
           _scrub(data);
-          // console.log(stocks);
-          return stocks;
+          _toArr(stocks);
+          return stocksArray;
         });
       };
 
@@ -28,8 +29,20 @@ FG.factory('stockService',
         }
       };
 
+      var _toArr = function _toArr(stocksObj) {
+        stocksArray.length = 0;
+        for (obj in stocksObj) {
+          stocksArray.unshift(obj);
+        }
+      };
+
+      var getStocksArray = function getStocksArray() {
+        return stocksArray;
+      };
+
       return {
-        all: all
+        all: all,
+        getStocksArray: getStocksArray
       };
     }
 
