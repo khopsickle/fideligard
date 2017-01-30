@@ -66,7 +66,33 @@ FG.factory('stockService',
       };
 
       var updateStocks = function updateStocks(date) {
-        angular.copy(stocks[date], currentStocks);
+        // console.log(_getStockOnDate(date, 1));
+        for (var i = 0; i < companies.length; i++) {
+          var symbol = companies[i];
+          var currentDayPrice = stocks[date][symbol];
+          var symbolInfo = {
+            today: currentDayPrice,
+            oneDay: currentDayPrice - _getStockOnDate(date, symbol, 1),
+            sevenDay: currentDayPrice - _getStockOnDate(date, symbol, 7),
+            thirtyDay: currentDayPrice - _getStockOnDate(date, symbol, 30),
+          };
+          currentStocks[symbol] = symbolInfo;
+        }
+      };
+
+      var _getStockOnDate = function _getStockOnDate(date, symbol, difference) {
+        // date magic
+        var d = new Date(date);
+        d.setDate(d.getDate() - difference);
+        var dFormated = d.toISOString().slice(0, 10);
+
+        // return the stock price on the date in the past
+        if (stocks[dFormated]) {
+          return stocks[dFormated][symbol];
+        } else {
+          // for dates in the past that don't have closing prices, just return the current day's price
+          return stocks[date][symbol];
+        }
       };
 
       var getCurrentStocks = function getCurrentStocks() {

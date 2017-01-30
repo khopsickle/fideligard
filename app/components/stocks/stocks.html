@@ -10,13 +10,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="(symbol, price) in currentDateStocks">
+    <tr ng-repeat="(symbol, prices) in currentDateStocks">
       <td>{{ symbol }}</td>
-      <td>{{ price | currency }}</td>
-      <td>tbd</td>
-      <td>tbd</td>
-      <td>tbd</td>
-      <td>tbd</td>
+      <td>{{ prices.today | currency }}</td>
+      <td>{{ prices.oneDay | currency }}</td>
+      <td>{{ prices.sevenDay | currency }}</td>
+      <td>{{ prices.thirtyDay | currency }}</td>
+      <td>tradeee meeeeh</td>
     </tr>
   </tbody>
 </table>
