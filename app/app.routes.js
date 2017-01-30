@@ -33,7 +33,8 @@ FG.config(function($stateProvider, $urlRouterProvider) {
       url: '/trade',
       views: {
         'content@': {
-          templateUrl: 'app/components/trade/trade.html'
+          templateUrl: 'app/components/trade/trade.html',
+          controller: 'TradeCtrl'
         }
       }
     })

@@ -23,6 +23,8 @@ FG.factory('stockService',
           for (var i = 0; i < response.length; i++) {
             var data = response[i].data.query.results.quote;
             _scrub(data);
+
+            // date array? is the array being used to access stock prices?
             _toArr(stocks);
           }
 
@@ -36,13 +38,6 @@ FG.factory('stockService',
           method: 'GET',
           url: '/assets/data/' + company + '.json'
         });
-        // .then(function(response){
-        //   var data = response.data.query.results.quote;
-        //   _scrub(data);
-        //   stocksArray.length = 0;
-        //   _toArr(stocks);
-        //   return stocksArray;
-        // });
       };
 
       var _scrub = function _scrub(data) {
@@ -66,7 +61,6 @@ FG.factory('stockService',
       };
 
       var updateStocks = function updateStocks(date) {
-        // console.log(_getStockOnDate(date, 1));
         for (var i = 0; i < companies.length; i++) {
           var symbol = companies[i];
           var currentDayPrice = stocks[date][symbol];
@@ -81,7 +75,7 @@ FG.factory('stockService',
       };
 
       var _getStockOnDate = function _getStockOnDate(date, symbol, difference) {
-        // date magic
+        // date magic, move to dateService?
         var d = new Date(date);
         d.setDate(d.getDate() - difference);
         var dFormated = d.toISOString().slice(0, 10);
@@ -91,6 +85,7 @@ FG.factory('stockService',
           return stocks[dFormated][symbol];
         } else {
           // for dates in the past that don't have closing prices, just return the current day's price
+          // should probably return the last close price from a previous day (going back until you hit a day that has a price)
           return stocks[date][symbol];
         }
       };
@@ -99,11 +94,22 @@ FG.factory('stockService',
         return currentStocks;
       };
 
+      var getCompanies = function getCompanies() {
+        return companies;
+      };
+
+      // refactor calls to getCurrent etc. to use this method?
+      // var getStocksAtDate = function getStocksAtDate(date) {
+      //   return stocks[date];
+      // };
+
       return {
         all: all,
         getStocksArray: getStocksArray,
         updateStocks: updateStocks,
-        getCurrentStocks: getCurrentStocks
+        getCurrentStocks: getCurrentStocks,
+        getCompanies: getCompanies,
+        // getPrice: getStockPriceAtDate
       };
     }
 

@@ -1,1 +1,48 @@
-tradesssss
+<h2>Trade</h2>
+
+<div class="col-xs-8">
+  <form name="newTrade">
+    <div class="form-group">
+      <label>Symbol</label>
+      <select ng-model="trade.symbol" ng-options="company for company in companies" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+      <label>Buy/Sell</label>
+      <select ng-model="trade.buySell" class="form-control">
+        <option value="buy">Buy</option>
+        <option value="sell">Sell</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <!-- needs validations -->
+      <label>Quantity</label>
+      <input type="number" name="quantity" min="1" ng-model="trade.quantity" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Date</label>
+      <p class="form-control-static">{{ tradeForm.date }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Price</label>
+      <p class="form-control-static">{{ tradeForm.price | currency }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Cost</label>
+      <p class="form-control-static">{{ +trade.quantity * tradeForm.price | currency }}</p>
+    </div>
+
+    <button type="submit" name="button" class="btn btn-success" ng-disabled="!validForm">Place Order</button>
+  </form>
+</div>
+
+
+<div class="form-group col-xs-4">
+  <strong>Cash Available:</strong> {{ cash | currency }}
+  <br>
+  <strong>Order Status:</strong> {{ validForm ? 'VALID' : 'INVALID'}}
+</div>

@@ -20,9 +20,7 @@
 
   <body>
 
-    <div class="container">
-    <!-- nav -->
-      <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -36,13 +34,17 @@
           </ul>
         </div><!-- /.container-fluid -->
       </nav>
+    <div class="container">
+      <!-- nav -->
 
       <div class="row">
+        <!-- stocks index -->
         <div class="col-lg-5">
           <div ui-view="stocks"></div>
         </div>
 
         <div class="col-lg-7">
+          <!-- date slider -->
           <div class="row">
             <div class="col-lg-12">
               <div ui-view="date"></div>
@@ -50,15 +52,18 @@
           </div>
 
           <div class="row">
+            <!-- views -->
             <div class="col-lg-12">
               <div ui-view="content">
+              </div>
             </div>
           </div>
-          </div>
-        </div>
+        </div><!-- right column -->
 
-      </div>
-    </div>
+        <hr>
+
+      </div><!-- page row -->
+    </div><!-- page container -->
   </body>
 
   <!-- Module -->
@@ -68,8 +73,11 @@
   <!-- Services -->
   <script src="/app/components/stocks/stockService.js"></script>
   <script src="/app/components/date/dateService.js"></script>
+  <script src="/app/components/trade/tradeService.js"></script>
+  <script src="/app/components/portfolio/portfolioService.js"></script>
   <!-- Controllers -->
   <script src="/app/components/date/dateController.js"></script>
   <script src="/app/components/stocks/stockController.js"></script>
+  <script src="/app/components/trade/tradeController.js"></script>
 
 </html>
