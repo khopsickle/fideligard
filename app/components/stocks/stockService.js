@@ -1,22 +1,48 @@
 FG.factory('stockService',
-  ['$http',
+  ['$http', '$q',
 
-    function($http) {
+    function($http, $q) {
 
       var stocks = {};
       var stocksArray = [];
+      var currentStocks = {};
+
+      var companies = ['AAPL', 'BAC', 'DB', 'F', 'GE', 'TWTR', 'JPM', 'XOM', 'VZ'];
 
       var all = function all() {
-        return $http({
-          method: 'GET',
-          url: '/assets/data/AAPL.json'
-        })
-        .then(function(response){
-          var data = response.data.query.results.quote;
-          _scrub(data);
-          _toArr(stocks);
+        var requestList = [];
+        // iterate thru companies and build http queries in an array
+        for (var i = 0; i < companies.length; i++) {
+          requestList.push(_getRequest(companies[i]));
+        }
+        return $q.all(requestList).then(function(response) {
+          // clear exisitng array on new request
+          stocksArray.length = 0;
+
+          // parse all the data returned from requestList
+          for (var i = 0; i < response.length; i++) {
+            var data = response[i].data.query.results.quote;
+            _scrub(data);
+            _toArr(stocks);
+          }
+
+          // return all the data to the resolve in routes
           return stocksArray;
         });
+      };
+
+      var _getRequest = function _getRequest(company) {
+        return $http({
+          method: 'GET',
+          url: '/assets/data/' + company + '.json'
+        });
+        // .then(function(response){
+        //   var data = response.data.query.results.quote;
+        //   _scrub(data);
+        //   stocksArray.length = 0;
+        //   _toArr(stocks);
+        //   return stocksArray;
+        // });
       };
 
       var _scrub = function _scrub(data) {
@@ -30,7 +56,6 @@ FG.factory('stockService',
       };
 
       var _toArr = function _toArr(stocksObj) {
-        stocksArray.length = 0;
         for (obj in stocksObj) {
           stocksArray.unshift(obj);
         }
@@ -40,9 +65,19 @@ FG.factory('stockService',
         return stocksArray;
       };
 
+      var updateStocks = function updateStocks(date) {
+        angular.copy(stocks[date], currentStocks);
+      };
+
+      var getCurrentStocks = function getCurrentStocks() {
+        return currentStocks;
+      };
+
       return {
         all: all,
-        getStocksArray: getStocksArray
+        getStocksArray: getStocksArray,
+        updateStocks: updateStocks,
+        getCurrentStocks: getCurrentStocks
       };
     }
 

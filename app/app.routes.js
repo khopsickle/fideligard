@@ -8,11 +8,11 @@ FG.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'stocks': {
           templateUrl: 'app/components/stocks/stocks.html',
-          controller: 'MainCtrl'
+          controller: 'StockCtrl'
         },
         'date': {
           templateUrl: 'app/components/date/date.html',
-          controller: 'MainCtrl'
+          controller: 'DateCtrl'
         }
       },
       resolve: {
