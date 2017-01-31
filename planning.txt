@@ -1,3 +1,11 @@
+### TO DO
+- filter for stock index
+- date picker for the date view
+- trade form submits:
+  - updates portfolio
+  - updates transaction history
+
+---
 states
   'parent' state ''
     parent.portfolio '/portfolio'

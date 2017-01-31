@@ -12,7 +12,7 @@ FG.factory('dateService',
     };
 
     var convertRange = function(dateIndex) {
-      var stocks = stockService.getStocksArray();
+      var stocks = stockService.getDatesArray();
       var index = dateIndex || 0;
       return stocks[index];
     };

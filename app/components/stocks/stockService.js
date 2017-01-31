@@ -4,7 +4,7 @@ FG.factory('stockService',
     function($http, $q) {
 
       var stocks = {};
-      var stocksArray = [];
+      var datesArray = [];
       var currentStocks = {};
 
       var companies = ['AAPL', 'BAC', 'DB', 'F', 'GE', 'TWTR', 'JPM', 'XOM', 'VZ'];
@@ -16,20 +16,18 @@ FG.factory('stockService',
           requestList.push(_getRequest(companies[i]));
         }
         return $q.all(requestList).then(function(response) {
-          // clear exisitng array on new request
-          stocksArray.length = 0;
-
+          // clear existing array on new request
+          datesArray.length = 0;
+          console.log(datesArray);
           // parse all the data returned from requestList
           for (var i = 0; i < response.length; i++) {
             var data = response[i].data.query.results.quote;
             _scrub(data);
-
-            // date array? is the array being used to access stock prices?
-            _toArr(stocks);
           }
+          _toArr(stocks);
 
           // return all the data to the resolve in routes
-          return stocksArray;
+          return datesArray;
         });
       };
 
@@ -52,12 +50,12 @@ FG.factory('stockService',
 
       var _toArr = function _toArr(stocksObj) {
         for (obj in stocksObj) {
-          stocksArray.unshift(obj);
+          datesArray.unshift(obj);
         }
       };
 
-      var getStocksArray = function getStocksArray() {
-        return stocksArray;
+      var getDatesArray = function getDatesArray() {
+        return datesArray;
       };
 
       var updateStocks = function updateStocks(date) {
@@ -105,7 +103,7 @@ FG.factory('stockService',
 
       return {
         all: all,
-        getStocksArray: getStocksArray,
+        getDatesArray: getDatesArray,
         updateStocks: updateStocks,
         getCurrentStocks: getCurrentStocks,
         getCompanies: getCompanies,

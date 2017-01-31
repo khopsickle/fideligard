@@ -5,23 +5,8 @@ FG.factory('tradeService',
 
       var tradeForm = {};
 
-      var currentStocks = stockService.getCurrentStocks();
-
-      var updateTradeForm = function updateTradeForm(date, symbol, quantity, buySell) {
-        tradeForm.symbol = symbol;
-        tradeForm.date = date;
-        tradeForm.price = currentStocks[symbol]['today'];
-        tradeForm.quantity = quantity;
-        tradeForm.buySell = buySell;
-      };
-
-      var getTradeForm = function getTradeForm() {
-        return tradeForm;
-      };
-
       var validForm = function validForm(form) {
         if (_allFields(form) && _buySellValidation(form)) {
-          console.log('all validations passed');
           return true;
         } else {
           return false;
@@ -37,7 +22,7 @@ FG.factory('tradeService',
         if (form.buySell === 'buy') {
           // buying: the price does not exceed current cash
           var currentCash = portfolioService.getCash();
-          return (currentCash >= (form.price * form.quantity));
+          return (currentCash.dollar >= (form.price * form.quantity));
         } else if (form.buySell === 'sell') {
           // selling: the quantity does not exceed current stock
           var currentStock = 10;
@@ -49,8 +34,6 @@ FG.factory('tradeService',
 
 
       return {
-        updateTradeForm: updateTradeForm,
-        getTradeForm: getTradeForm,
         validForm: validForm
       };
     }

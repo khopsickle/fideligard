@@ -1,10 +1,10 @@
 <h2>Trade</h2>
 
 <div class="col-xs-8">
-  <form name="newTrade">
+  <form name="newTrade" ng-submit="addTransaction(tradeForm)">
     <div class="form-group">
       <label>Symbol</label>
-      <select ng-model="trade.symbol" ng-options="company for company in companies" class="form-control"></select>
+      <select ng-model="tradeForm.symbol" ng-options="company for company in companies" class="form-control"></select>
     </div>
 
     <div class="form-group">
@@ -42,7 +42,7 @@
 
 
 <div class="form-group col-xs-4">
-  <strong>Cash Available:</strong> {{ cash | currency }}
+  <strong>Cash Available:</strong> {{ cash.dollar | currency }}
   <br>
   <strong>Order Status:</strong> {{ validForm ? 'VALID' : 'INVALID'}}
 </div>
