@@ -1,36 +1,86 @@
 FG.factory('transactionService', [
   function() {
 
-    var transactions = {};
-
-    var model = {
+    // seeded
+    var transactions = {
       '2016-07-05': {
-        'bought': [
+        'buy': [
           {
-            symbol: 'AAPL',
+            symbol: 'seededAAPL',
             quantity: '10',
             price: 94
           },
           {
-            symbol: 'AAPL',
+            symbol: 'seededAAPL',
             quantity: '10',
             price: 94
           },
         ],
-        'sold': [
+        'sell': [
           {
-            symbol: 'AAPL',
+            symbol: 'seededAAPL',
             quantity: '10',
             price: 94
           },
           {
-            symbol: 'AAPL',
+            symbol: 'seededAAPL',
+            quantity: '10',
+            price: 94
+          }
+        ]
+      },
+      '2016-07-06': {
+        'buy': [
+          {
+            symbol: 'seededAAPL',
+            quantity: '10',
+            price: 94
+          },
+          {
+            symbol: 'seededAAPL',
+            quantity: '10',
+            price: 94
+          },
+        ],
+        'sell': [
+          {
+            symbol: 'seededAAPL',
+            quantity: '10',
+            price: 94
+          },
+          {
+            symbol: 'seededAAPL',
             quantity: '10',
             price: 94
           }
         ]
       }
     };
+
+    // seeded
+    var formattedTransactions = [
+      {
+        buySell: "buy",
+        date: "2016-07-05",
+        price: 12.74,
+        quantity: 1,
+        symbol: "seededBAC"
+      },
+      {
+        buySell: "buy",
+        date: "2016-07-05",
+        price: 12.74,
+        quantity: 1,
+        symbol: "seededBAC"
+      },
+      {
+        buySell: "sell",
+        date: "2016-07-12",
+        price: 94,
+        quantity: 4,
+        symbol: "seededAAPL"
+      },
+    ];
 
     var addTransaction = function addTransaction(form) {
       var newTransaction = {
@@ -48,7 +98,13 @@ FG.factory('transactionService', [
 
       transactions[form.date][form.buySell].push(newTransaction);
 
-      console.log(transactions);
+      // view formatted
+      formattedTransactions.push(form);
+      console.log(formattedTransactions);
+    };
+
+    var getFormattedTransactions = function getFormattedTransactions() {
+      return formattedTransactions;
     };
 
     var getTransactions = function getTransactions() {
@@ -57,7 +113,8 @@ FG.factory('transactionService', [
 
     return {
       addTransaction: addTransaction,
-      getTransactions: getTransactions
+      getTransactions: getTransactions,
+      getFormattedTransactions: getFormattedTransactions
     };
   }
 ]);

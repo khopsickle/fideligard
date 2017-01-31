@@ -1,6 +1,10 @@
 ### TO DO
 - filter for stock index
-- date picker for the date view
+- filter for transactions
+- sort for transactions
+
+- date picker for the date view?
+
 - trade form submits:
   - updates portfolio
   - updates transaction history
