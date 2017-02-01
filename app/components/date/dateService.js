@@ -11,14 +11,21 @@ FG.factory('dateService',
       return currentDate;
     };
 
-    var convertRange = function(dateIndex) {
+    var convertRange = function convertRange(dateIndex) {
       var stocks = stockService.getDatesArray();
       var index = dateIndex || 0;
       return stocks[index];
     };
 
+    var convertDateString = function convertDateString(date) {
+      var d = new Date(date);
+      d.setDate(d.getDate());
+      return d;
+    };
+
     return {
       convertRange: convertRange,
+      convertDateString: convertDateString,
       setDate: setDate,
       getDate: getDate
     };

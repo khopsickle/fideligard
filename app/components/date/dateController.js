@@ -11,8 +11,6 @@ FG.controller('DateCtrl', [
 
     // selected date info, updates when the slider changes
     $scope.$watch('dateIndex', function() {
-      // stockService.updateStocks($scope.currentDate);
-      // tradeService.updateTradeForm??
       $scope.currentDate = dateService.convertRange($scope.dateIndex);
       dateService.setDate($scope.currentDate);
     });

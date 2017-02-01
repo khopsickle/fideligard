@@ -73,7 +73,7 @@ FG.factory('stockService',
       };
 
       var _getStockOnDate = function _getStockOnDate(date, symbol, difference) {
-        // date magic, move to dateService?
+        // refactor to use dateService string converting method
         var d = new Date(date);
         d.setDate(d.getDate() - difference);
         var dFormated = d.toISOString().slice(0, 10);
@@ -96,18 +96,12 @@ FG.factory('stockService',
         return companies;
       };
 
-      // refactor calls to getCurrent etc. to use this method?
-      // var getStocksAtDate = function getStocksAtDate(date) {
-      //   return stocks[date];
-      // };
-
       return {
         all: all,
         getDatesArray: getDatesArray,
         updateStocks: updateStocks,
         getCurrentStocks: getCurrentStocks,
-        getCompanies: getCompanies,
-        // getPrice: getStockPriceAtDate
+        getCompanies: getCompanies
       };
     }
 

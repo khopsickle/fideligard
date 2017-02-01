@@ -2,73 +2,85 @@ FG.factory('transactionService', [
   function() {
 
     // seeded
-    var transactions = {
-      '2016-07-05': {
-        'buy': [
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          },
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          },
-        ],
-        'sell': [
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          },
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          }
-        ]
-      },
-      '2016-07-06': {
-        'buy': [
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          },
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          },
-        ],
-        'sell': [
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          },
-          {
-            symbol: 'seededAAPL',
-            quantity: '10',
-            price: 94
-          }
-        ]
-      }
-    };
+    // var transactions = {
+    //   '2016-01-05': {
+    //     'buy': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       }
+    //     ],
+    //     'sell': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       }
+    //     ]
+    //   },
+    //   '2016-03-06': {
+    //     'buy': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       },
+    //     ],
+    //     'sell': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       },
+    //     ]
+    //   },
+    //   '2016-07-06': {
+    //     'buy': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       },
+    //     ],
+    //     'sell': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       },
+    //     ]
+    //   },
+    //   '2016-09-06': {
+    //     'buy': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       },
+    //     ],
+    //     'sell': [
+    //       {
+    //         symbol: 'seededAAPL',
+    //         quantity: '10',
+    //         price: 94
+    //       },
+    //     ]
+    //   }
+    // };
 
     // seeded
-    var formattedTransactions = [
+    var transactions = [
       {
         buySell: "buy",
-        date: "2016-07-05",
+        date: "2016-01-05",
         price: 12.74,
         quantity: 1,
         symbol: "seededBAC"
       },
       {
         buySell: "buy",
-        date: "2016-07-05",
+        date: "2016-03-05",
         price: 12.74,
         quantity: 1,
         symbol: "seededBAC"
@@ -76,6 +88,13 @@ FG.factory('transactionService', [
       {
         buySell: "sell",
         date: "2016-07-12",
+        price: 94,
+        quantity: 4,
+        symbol: "seededAAPL"
+      },
+      {
+        buySell: "sell",
+        date: "2016-10-12",
         price: 94,
         quantity: 4,
         symbol: "seededAAPL"
@@ -96,15 +115,7 @@ FG.factory('transactionService', [
         };
       }
 
-      transactions[form.date][form.buySell].push(newTransaction);
-
-      // view formatted
-      formattedTransactions.push(form);
-      console.log(formattedTransactions);
-    };
-
-    var getFormattedTransactions = function getFormattedTransactions() {
-      return formattedTransactions;
+      transactions.push(form);
     };
 
     var getTransactions = function getTransactions() {
@@ -114,7 +125,6 @@ FG.factory('transactionService', [
     return {
       addTransaction: addTransaction,
       getTransactions: getTransactions,
-      getFormattedTransactions: getFormattedTransactions
     };
   }
 ]);

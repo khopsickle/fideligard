@@ -4,10 +4,6 @@ FG.controller('StockCtrl', [
     $scope.currentDateStocks = stockService.getCurrentStocks();
     $scope.currentDate = dateService.getDate(); // currentDate.date
 
-    $scope.setTradeStock = function setTradeStock(symbol) {
-      tradeService.setSymbol(symbol);
-    };
-
     $scope.$watch('currentDate.date', function() {
       stockService.updateStocks($scope.currentDate.date);
     });
