@@ -1,75 +1,6 @@
 FG.factory('transactionService', [
   function() {
 
-    // seeded
-    // var transactions = {
-    //   '2016-01-05': {
-    //     'buy': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       }
-    //     ],
-    //     'sell': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       }
-    //     ]
-    //   },
-    //   '2016-03-06': {
-    //     'buy': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       },
-    //     ],
-    //     'sell': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       },
-    //     ]
-    //   },
-    //   '2016-07-06': {
-    //     'buy': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       },
-    //     ],
-    //     'sell': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       },
-    //     ]
-    //   },
-    //   '2016-09-06': {
-    //     'buy': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       },
-    //     ],
-    //     'sell': [
-    //       {
-    //         symbol: 'seededAAPL',
-    //         quantity: '10',
-    //         price: 94
-    //       },
-    //     ]
-    //   }
-    // };
-
-    // seeded
     var transactions = [
       {
         buySell: "buy",
@@ -84,6 +15,13 @@ FG.factory('transactionService', [
         price: 12.74,
         quantity: 1,
         symbol: "seededBAC"
+      },
+      {
+        buySell: "buy",
+        date: "2016-07-10",
+        price: 94,
+        quantity: 12,
+        symbol: "seededAAPL"
       },
       {
         buySell: "sell",
@@ -104,18 +42,13 @@ FG.factory('transactionService', [
     var addTransaction = function addTransaction(form) {
       var newTransaction = {
         symbol: form.symbol,
+        buySell: form.buySell,
         quantity: form.quantity,
+        date: form.date,
         price: form.price
       };
 
-      if (!transactions[form.date]) {
-        transactions[form.date] = {
-          'buy': [],
-          'sell': []
-        };
-      }
-
-      transactions.push(form);
+      transactions.push(newTransaction);
     };
 
     var getTransactions = function getTransactions() {

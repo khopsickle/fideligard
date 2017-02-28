@@ -18,7 +18,6 @@ FG.factory('stockService',
         return $q.all(requestList).then(function(response) {
           // clear existing array on new request
           datesArray.length = 0;
-          console.log(datesArray);
           // parse all the data returned from requestList
           for (var i = 0; i < response.length; i++) {
             var data = response[i].data.query.results.quote;

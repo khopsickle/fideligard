@@ -6,6 +6,23 @@ FG.factory('portfolioService',
     var transactionSubset = {};
     var portfolio = {};
 
+    var transactions = {
+      '2016-01-05': [
+        {
+          symbol: 'seededAAPL',
+          buySell: 'buy',
+          quantity: '10',
+          price: 94
+        },
+        {
+          symbol: 'seededAAPL',
+          buySell: 'sell',
+          quantity: '10',
+          price: 94
+        }
+      ]
+    };
+
     var getCash = function getCash() {
       return cash;
     };
@@ -31,34 +48,44 @@ FG.factory('portfolioService',
 
       for (var i = 0; i < transactions.length; i++) {
         var stockDate = transactions[i].date;
+        var stock = transactions[i].symbol;
         var iterationDate = dateService.convertDateString(stockDate);
         // break out of loop when we're past given date
         if (iterationDate > currentDate) { break; }
 
         // otherwise add the stock to the transactionSubset
-        if (!newPortfolio[stockDate]) {
-          newPortfolio[stockDate] = {};
+        if (!newPortfolio[stock]) {
+          newPortfolio[stock] = [];
         }
-        newPortfolio[stockDate] = transactions[i];
+        newPortfolio[stock].push(transactions[i]);
       }
 
       angular.copy(newPortfolio, transactionSubset);
       recalcPortfolio();
     };
 
-    // refactor this?  calculate everything within updatePortfolio it iterates
     var recalcPortfolio = function recalcPortfolio() {
-      var calculations = {
-        value: 0
-      };
+      var totals = {};
 
-      // wrong object, group everything by stockSymbol
-      for (transactionDate in transactionSubset) {
-        var transObj = transactionSubset[transactionDate];
-        calculations.value += transObj.price * transObj.quantity;
+      for (transactionStock in transactionSubset) {
+        var calculations = {
+          quantity: 0,
+        };
+
+        var transObj = transactionSubset[transactionStock];
+        for (var i = 0; i < transObj.length; i++) {
+          if (transObj[i]['buySell'] === 'buy') {
+            calculations.quantity += transObj[i]['quantity'];
+          } else {
+            calculations.quantity -= transObj[i]['quantity'];
+          }
+        }
+
+        totals[transactionStock] = calculations;
+        console.log(totals);
       }
 
-      angular.copy(calculations, portfolio);
+      angular.copy(totals, portfolio);
     };
 
     var getPortfolio = function getPortfolio() {
