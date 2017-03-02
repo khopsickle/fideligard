@@ -7,35 +7,35 @@ FG.factory('transactionService', [
         date: "2016-01-05",
         price: 12.74,
         quantity: 1,
-        symbol: "seededBAC"
+        symbol: "BAC"
       },
       {
         buySell: "buy",
         date: "2016-03-05",
         price: 12.74,
         quantity: 1,
-        symbol: "seededBAC"
+        symbol: "BAC"
       },
       {
         buySell: "buy",
         date: "2016-07-10",
         price: 94,
         quantity: 12,
-        symbol: "seededAAPL"
+        symbol: "AAPL"
       },
       {
         buySell: "sell",
         date: "2016-07-12",
         price: 94,
         quantity: 4,
-        symbol: "seededAAPL"
+        symbol: "AAPL"
       },
       {
         buySell: "sell",
         date: "2016-10-12",
         price: 94,
         quantity: 4,
-        symbol: "seededAAPL"
+        symbol: "AAPL"
       },
     ];
 

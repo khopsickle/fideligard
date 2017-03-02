@@ -19,13 +19,13 @@ CURRENT PORTFOLIO TABLE
     <tr ng-repeat='(stock, details) in currentPortfolio track by $index'>
       <td>{{ stock }}</td>
       <td>{{ details.quantity }}</td>
-      <td>Cost Basis</td>
-      <td>Current Value</td>
-      <td>Profit/Loss</td>
-      <td>Current Price</td>
-      <td>1d</td>
-      <td>7d</td>
-      <td>30d</td>
+      <td>{{ details.costBasis | currency }}</td>
+      <td>{{ details.quantity * currentStock[stock].today | currency }}</td>
+      <td>{{ details.quantity * currentStock[stock].today - details.costBasis | currency }}</td>
+      <td>{{ currentStock[stock].today | currency }}</td>
+      <td>{{ currentStock[stock].oneDay | currency }}</td>
+      <td>{{ currentStock[stock].sevenDay | currency }}</td>
+      <td>{{ currentStock[stock].thirtyDay | currency }}</td>
       <td>Trade?</td>
     </tr>
   </tbody>

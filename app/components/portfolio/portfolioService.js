@@ -6,23 +6,6 @@ FG.factory('portfolioService',
     var transactionSubset = {};
     var portfolio = {};
 
-    var transactions = {
-      '2016-01-05': [
-        {
-          symbol: 'seededAAPL',
-          buySell: 'buy',
-          quantity: '10',
-          price: 94
-        },
-        {
-          symbol: 'seededAAPL',
-          buySell: 'sell',
-          quantity: '10',
-          price: 94
-        }
-      ]
-    };
-
     var getCash = function getCash() {
       return cash;
     };
@@ -32,13 +15,6 @@ FG.factory('portfolioService',
       amount = type === 'buy' ? -amount : amount;
       cash.dollar += amount;
     };
-
-    // using the current date
-    // iterate through all transactions previous to this date (copy subset or all data from the transaction service?)
-      // display current stock portfolio
-        // add and remove based on buy and sell
-        // should also hook into trade
-      // calculate the cash history
 
     var updatePortfolioData = function getTransactions(date) {
       var transactions = transactionService.getTransactions();
@@ -70,19 +46,26 @@ FG.factory('portfolioService',
       for (transactionStock in transactionSubset) {
         var calculations = {
           quantity: 0,
+          costBasis: 0
         };
 
         var transObj = transactionSubset[transactionStock];
+
+        console.log(transObj);
+
         for (var i = 0; i < transObj.length; i++) {
+          console.log(transObj[i]);
+          // calculations.costBasis +=
           if (transObj[i]['buySell'] === 'buy') {
             calculations.quantity += transObj[i]['quantity'];
+            calculations.costBasis += transObj[i]['quantity'] * transObj[i]['price'];
           } else {
             calculations.quantity -= transObj[i]['quantity'];
+            calculations.costBasis -= transObj[i]['quantity'] * transObj[i]['price'];
           }
         }
 
         totals[transactionStock] = calculations;
-        console.log(totals);
       }
 
       angular.copy(totals, portfolio);
