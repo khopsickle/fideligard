@@ -2,6 +2,8 @@
 
 A stock portfolio simulator built as a single page Angular app.
 
+![ss](screenshot.png?raw=true "Screenshot of project")
+
 ## Deployed
 - See it here: [http://catherinekwak.com/fideligard/](http://catherinekwak.com/fideligard/)
 - Features:
