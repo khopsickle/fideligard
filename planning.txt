@@ -3,12 +3,6 @@
 - filter for transactions
 - sort for transactions
 
-- date picker for the date view?
-
-- trade form submits:
-  - updates portfolio
-  - updates transaction history
-
 ---
 states
   'parent' state ''

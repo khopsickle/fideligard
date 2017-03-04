@@ -1,4 +1,4 @@
-CURRENT PORTFOLIO TABLE
+<h2>Portfolio</h2>
 
 <table class="table table-hover">
   <thead>
@@ -26,11 +26,7 @@ CURRENT PORTFOLIO TABLE
       <td>{{ currentStock[stock].oneDay | currency }}</td>
       <td>{{ currentStock[stock].sevenDay | currency }}</td>
       <td>{{ currentStock[stock].thirtyDay | currency }}</td>
-      <td>Trade?</td>
+      <td><a ui-sref="main.trade({ symbol: stock })">Trade</a></td>
     </tr>
   </tbody>
 </table>
-
-{{ currentPortfolio }}
-<br><br>
-{{ currentSubset }}

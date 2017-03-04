@@ -19,28 +19,28 @@ FG.factory('portfolioService',
     var updatePortfolioData = function getTransactions(date) {
       var transactions = transactionService.getTransactions();
       var newPortfolio = {};
-
       var currentDate = dateService.convertDateString(date);
 
       for (var i = 0; i < transactions.length; i++) {
         var stockDate = transactions[i].date;
         var stock = transactions[i].symbol;
         var iterationDate = dateService.convertDateString(stockDate);
-        // break out of loop when we're past given date
+
         if (iterationDate > currentDate) { break; }
 
         // otherwise add the stock to the transactionSubset
         if (!newPortfolio[stock]) {
           newPortfolio[stock] = [];
         }
+
         newPortfolio[stock].push(transactions[i]);
       }
 
       angular.copy(newPortfolio, transactionSubset);
-      recalcPortfolio();
+      _recalcPortfolio();
     };
 
-    var recalcPortfolio = function recalcPortfolio() {
+    var _recalcPortfolio = function _recalcPortfolio() {
       var totals = {};
 
       for (transactionStock in transactionSubset) {
@@ -50,12 +50,7 @@ FG.factory('portfolioService',
         };
 
         var transObj = transactionSubset[transactionStock];
-
-        console.log(transObj);
-
         for (var i = 0; i < transObj.length; i++) {
-          console.log(transObj[i]);
-          // calculations.costBasis +=
           if (transObj[i]['buySell'] === 'buy') {
             calculations.quantity += transObj[i]['quantity'];
             calculations.costBasis += transObj[i]['quantity'] * transObj[i]['price'];
