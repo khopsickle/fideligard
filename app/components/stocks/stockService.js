@@ -33,7 +33,7 @@ FG.factory('stockService',
       var _getRequest = function _getRequest(company) {
         return $http({
           method: 'GET',
-          url: '/assets/data/' + company + '.json'
+          url: 'http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%22' + company + '%22%20and%20startDate%20=%20%222015-12-01%22%20and%20endDate%20=%20%222016-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback='
         });
       };
 
